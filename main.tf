@@ -144,7 +144,7 @@ resource "aws_instance" "finditgeek_presentation_loadbalancer" {
   instance_type = "t2.micro"
 
   vpc_security_group_ids = [aws_security_group.finditgeek_presentation_loadbalancer.id]
-  subnet_id              = aws_subnet.finditgeek_presentation_public
+  subnet_id              = aws_subnet.finditgeek_presentation_public.id
   private_ip             = "10.10.10.10"
 
   user_data = file("provisioning_loadbalancer.sh")
@@ -165,7 +165,7 @@ resource "aws_instance" "finditgeek_presentation_webserver" {
   instance_type = "t2.micro"
 
   vpc_security_group_ids = [aws_security_group.finditgeek_presentation_webserver.id]
-  subnet_id              = aws_subnet.finditgeek_presentation_private
+  subnet_id              = aws_subnet.finditgeek_presentation_private.id
   private_ip             = element(var.webserver_ip_private, count.index)
 
   user_data = file("provisioning_webserver.sh")
