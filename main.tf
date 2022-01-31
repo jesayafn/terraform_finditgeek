@@ -52,7 +52,7 @@ resource "aws_route_table" "finditgeek_presentation_prisub" {
 
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id = aws_instance.finditgeek_presentation_loadbalancer
+    instance_id = aws_instance.finditgeek_presentation_loadbalancer
   }
 
   route {
