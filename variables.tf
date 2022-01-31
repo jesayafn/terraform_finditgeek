@@ -8,5 +8,5 @@ variable "aws_secretkey" {
 
 variable "webserver_ip_private" {
   type    = list(any)
-  default = ["10.10.10.20/28", "10.10.10.30/28"]
+  default = ["10.10.10.20", "10.10.10.30"]
 }
