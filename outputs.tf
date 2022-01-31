@@ -1,3 +1,3 @@
 output "public_ip_ec2" {
-  value = aws_instance.prometheus_grafana.public_ip
+  value = aws_instance.finditgeek_presentation_loadbalancer.public_ip
 }
