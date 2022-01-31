@@ -24,15 +24,15 @@ resource "aws_subnet" "finditgeek_presentation_public" {
   vpc_id                  = aws_vpc.finditgeek_presentation.id
   cidr_block              = "10.10.10.0/28"
   map_public_ip_on_launch = true
-  
+
   tags = {
     Name = "finditgeek_presentation_public"
   }
 }
 
 resource "aws_subnet" "finditgeek_presentation_private" {
-  vpc_id                  = aws_vpc.finditgeek_presentation.id
-  cidr_block              = "10.10.10.16/28"
+  vpc_id     = aws_vpc.finditgeek_presentation.id
+  cidr_block = "10.10.10.16/28"
 
   tags = {
     Name = "finditgeek_presentation_private"
@@ -54,10 +54,10 @@ resource "aws_route_table" "finditgeek_presentation_prisub" {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_instance.finditgeek_presentation_loadbalancer
   }
-  
+
   route {
-    cidr_block = "10.10.10.0/28"
-    gateway_id = aws_instance.finditgeek_presentation_loadbalancer
+    cidr_block  = "10.10.10.0/28"
+    instance_id = aws_instance.finditgeek_presentation_loadbalancer
   }
 
   tags = {
@@ -110,20 +110,20 @@ resource "aws_security_group" "finditgeek_presentation_loadbalancer" {
   }
 
   ingress {
-      description = "HTTP"
-      from_port   = 22
-      to_port     = 22
-      protocol    = "tcp"
-      cidr_blocks = ["0.0.0.0/0"]
-    }
+    description = "HTTP"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 
   ingress {
-      description = "HTTPS"
-      from_port   = 443
-      to_port     = 443
-      protocol    = "tcp"
-      cidr_blocks = ["0.0.0.0/0"]
-    }
+    description = "HTTPS"
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 
   egress {
     from_port   = 0
@@ -158,12 +158,12 @@ resource "aws_security_group" "finditgeek_presentation_webserver" {
   }
 
   ingress {
-      description = "HTTP"
-      from_port   = 22
-      to_port     = 22
-      protocol    = "tcp"
-      cidr_blocks = ["0.0.0.0/0"]
-    }
+    description = "HTTP"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 
   egress {
     from_port   = 0
@@ -183,12 +183,12 @@ resource "aws_security_group" "finditgeek_presentation_webserver" {
 resource "aws_instance" "finditgeek_presentation_loadbalancer" {
   ami           = "ami-055d15d9cfddf7bd3"
   instance_type = "t2.micro"
-  
-  vpc_security_group_ids = [ aws_security_group.finditgeek_presentation_loadbalancer.id ]
-  private_ip = "10.10.10.10"
-  
+
+  vpc_security_group_ids = [aws_security_group.finditgeek_presentation_loadbalancer.id]
+  private_ip             = "10.10.10.10"
+
   user_data = file("provisioning_loadbalancer.sh")
-  
+
   root_block_device {
     delete_on_termination = true
   }
@@ -199,15 +199,15 @@ resource "aws_instance" "finditgeek_presentation_loadbalancer" {
 }
 
 resource "aws_instance" "finditgeek_presentation_webserver" {
-  count = 2
+  count         = 2
   ami           = "ami-055d15d9cfddf7bd3"
   instance_type = "t2.micro"
-  
-  vpc_security_group_ids = [ aws_security_group.finditgeek_presentation_webserver.id ]
-  private_ip =  element(var.webserver_ip_private,count.index)
-  
+
+  vpc_security_group_ids = [aws_security_group.finditgeek_presentation_webserver.id]
+  private_ip             = element(var.webserver_ip_private, count.index)
+
   user_data = file("provisioning_webserver.sh")
-  
+
   root_block_device {
     delete_on_termination = true
   }
