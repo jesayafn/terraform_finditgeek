@@ -157,13 +157,16 @@ resource "aws_instance" "finditgeek_presentation_loadbalancer" {
   }
 }
 
+
 resource "aws_instance" "finditgeek_presentation_webserver" {
   count         = 2
   ami           = "ami-055d15d9cfddf7bd3"
   instance_type = "t2.micro"
 
+  for_each = var.webserver_ip_private
+
   vpc_security_group_ids = [aws_security_group.finditgeek_presentation_webserver.id]
-  private_ip             = element(var.webserver_ip_private, count.index)
+  private_ip             = each.value
 
   user_data = file("provisioning_webserver.sh")
 
