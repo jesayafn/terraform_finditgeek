@@ -199,6 +199,7 @@ resource "aws_instance" "finditgeek_presentation_loadbalancer" {
 }
 
 resource "aws_instance" "finditgeek_presentation_webserver" {
+  count = 2
   ami           = "ami-055d15d9cfddf7bd3"
   instance_type = "t2.micro"
   
