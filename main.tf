@@ -163,10 +163,8 @@ resource "aws_instance" "finditgeek_presentation_webserver" {
   ami           = "ami-055d15d9cfddf7bd3"
   instance_type = "t2.micro"
 
-  for_each = var.webserver_ip_private
-
   vpc_security_group_ids = [aws_security_group.finditgeek_presentation_webserver.id]
-  private_ip             = each.value
+  private_ip             = element(var.webserver_ip_private, count.index)
 
   user_data = file("provisioning_webserver.sh")
 
@@ -185,7 +183,7 @@ resource "aws_route_table" "finditgeek_presentation_prisub" {
   vpc_id = aws_vpc.finditgeek_presentation.id
 
   route {
-    cidr_block = "0.0.0.0/0"
+    cidr_block  = "0.0.0.0/0"
     instance_id = aws_instance.finditgeek_presentation_loadbalancer.id
   }
 
