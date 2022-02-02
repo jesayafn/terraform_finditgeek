@@ -33,6 +33,7 @@ resource "aws_subnet" "finditgeek_presentation_public" {
 resource "aws_subnet" "finditgeek_presentation_private" {
   vpc_id     = aws_vpc.finditgeek_presentation.id
   cidr_block = "10.10.10.16/28"
+  map_public_ip_on_launch = true
 
   tags = {
     Name = "finditgeek_presentation_private"
