@@ -181,11 +181,6 @@ resource "aws_route_table" "finditgeek_presentation_prisub" {
   vpc_id = aws_vpc.finditgeek_presentation.id
 
   route {
-    cidr_block  = "0.0.0.0/0"
-    instance_id = aws_instance.finditgeek_presentation_loadbalancer.id
-  }
-
-  route {
     cidr_block  = "10.10.10.0/28"
     instance_id = aws_instance.finditgeek_presentation_loadbalancer.id
   }

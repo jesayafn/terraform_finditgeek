@@ -1,0 +1,6 @@
+--2022-02-02 16:06:40--  https://www-presentation.s3.ap-southeast-1.amazonaws.com/cert.zip?response-content-disposition=inline
+Resolving www-presentation.s3.ap-southeast-1.amazonaws.com (www-presentation.s3.ap-southeast-1.amazonaws.com)... 52.219.40.31
+Connecting to www-presentation.s3.ap-southeast-1.amazonaws.com (www-presentation.s3.ap-southeast-1.amazonaws.com)|52.219.40.31|:443... connected.
+HTTP request sent, awaiting response... 400 Bad Request
+2022-02-02 16:06:41 ERROR 400: Bad Request.
+
