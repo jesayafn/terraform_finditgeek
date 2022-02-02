@@ -24,13 +24,15 @@ http{
     }
 
     server {
-        listen        443 ssl;
+        listen 443 ssl;
         ssl_certificate /etc/tls/cert.pem
         ssl_certificate_key /etc/tls/key.pem
         access_log /var/log/nginx/finditgeek-presentation_access_log;
         error_log /var/log/nginx/finditgeek-presentation_error_log;
         
-        proxy_pass http://finditgeek:80
+        location / {
+            proxy_pass http://finditgeek:80
+        }
     }
 }
 EOF'
