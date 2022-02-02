@@ -135,7 +135,7 @@ resource "aws_instance" "finditgeek_presentation_loadbalancer" {
   ami           = "ami-055d15d9cfddf7bd3"
   instance_type = "t2.micro"
 
-  key_name               = jesaya
+  key_name               = "jesaya"
   vpc_security_group_ids = [aws_security_group.finditgeek_presentation_loadbalancer.id]
 
   subnet_id  = aws_subnet.finditgeek_presentation_public.id
@@ -159,7 +159,7 @@ resource "aws_instance" "finditgeek_presentation_webserver" {
   instance_type = "t2.micro"
 
   vpc_security_group_ids = [aws_security_group.finditgeek_presentation_webserver.id]
-  key_name               = jesaya
+  key_name               = "jesaya"
 
   subnet_id  = aws_subnet.finditgeek_presentation_private.id
   private_ip = element(var.webserver_ip_private, count.index)
