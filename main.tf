@@ -189,3 +189,12 @@ resource "aws_route_table" "finditgeek_presentation" {
     Name = "finditgeek_presentation"
   }
 }                       
+
+resource "aws_route_table_association" "finditgeek_presentation_prisub" {
+  subnet_id      = aws_subnet.finditgeek_presentation_private.id
+  route_table_id = aws_route_table.finditgeek_presentation.id
+}
+resource "aws_route_table_association" "finditgeek_presentation_pubsub" {
+  subnet_id      = aws_subnet.finditgeek_presentation_public.id
+  route_table_id = aws_route_table.finditgeek_presentation.id
+}
