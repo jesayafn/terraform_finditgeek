@@ -177,7 +177,7 @@ resource "aws_instance" "finditgeek_presentation_webserver" {
 
 #ROUTE TABLE
 
-resource "aws_route_table" "finditgeek_presentation_prisub" {
+resource "aws_route_table" "finditgeek_presentation" {
   vpc_id = aws_vpc.finditgeek_presentation.id
 
   route {
@@ -186,29 +186,6 @@ resource "aws_route_table" "finditgeek_presentation_prisub" {
   }
 
   tags = {
-    Name = "finditgeek_presentation_prisub"
+    Name = "finditgeek_presentation"
   }
 }                       
-
-resource "aws_route_table_association" "finditgeek_presentation_prisub" {
-  subnet_id      = aws_subnet.finditgeek_presentation_private.id
-  route_table_id = aws_route_table.finditgeek_presentation_prisub.id
-}
-
-resource "aws_route_table" "finditgeek_presentation_pubsub" {
-  vpc_id = aws_vpc.finditgeek_presentation.id
-
-  route {
-    cidr_block = "0.0.0.0/0"
-    gateway_id = aws_internet_gateway.finditgeek_presentation.id
-  }
-
-  tags = {
-    Name = "finditgeek_presentation_prisub"
-  }
-}
-
-resource "aws_route_table_association" "finditgeek_presentation_pubsub" {
-  subnet_id      = aws_subnet.finditgeek_presentation_public.id
-  route_table_id = aws_route_table.finditgeek_presentation_pubsub.id
-}
