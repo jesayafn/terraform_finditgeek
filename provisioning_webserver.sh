@@ -4,13 +4,8 @@
 sudo apt update
 sudo apt upgrade -y
 
-#Install Docker
-sudo apt-get install ca-certificates curl gnupg lsb-release -y
-echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
-  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-sudo apt-get update
-sudo apt-get install docker-ce docker-ce-cli containerd.io -y
+#Install and configure Docker
+sudo apt install docker.io
 sudo groupadd docker
 sudo usermod -aG docker $USER
 
