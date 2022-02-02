@@ -181,14 +181,14 @@ resource "aws_route_table" "finditgeek_presentation_prisub" {
   vpc_id = aws_vpc.finditgeek_presentation.id
 
   route {
-    cidr_block  = "10.10.10.0/28"
+    cidr_block  = "10.10.10.0/28"                                                       
     instance_id = aws_instance.finditgeek_presentation_loadbalancer.id
   }
 
   tags = {
     Name = "finditgeek_presentation_prisub"
   }
-}
+}                       
 
 resource "aws_route_table_association" "finditgeek_presentation_prisub" {
   subnet_id      = aws_subnet.finditgeek_presentation_private.id
