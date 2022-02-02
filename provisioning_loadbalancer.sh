@@ -13,7 +13,7 @@ sudo mkdir /etc/tls
 unzip cert.zip -d cert
 sudo cp cert/* /etc/tls
 
-#config nginx
+#Configure NGINX
 sudo bash -c 'cat <<EOF > /etc/nginx/conf.d/nginx.conf
 upstream finditgeek {
     server 10.10.10.20:80 max_fails=3 fail_timeout=30s;
@@ -39,3 +39,5 @@ server {
     return 301 https://10.10.10.10;
 }
 EOF'
+
+sudo systemctl restart nginx.service
