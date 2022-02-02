@@ -15,7 +15,6 @@ sudo groupadd docker
 sudo usermod -aG docker $USER
 
 #Build and run simple web app on Docker
-
 git clone https://github.com/jessie-txt/simple-webapp.git
 cd simple-webapp
 docker build . -t simple-webapp:latest
