@@ -19,3 +19,4 @@ sudo usermod -aG docker $USER
 git clone https://github.com/jessie-txt/simple-webapp.git
 cd simple-webapp
 docker build . -t simple-webapp:latest
+docker run -d -p 80:80 simple-webapp:latest

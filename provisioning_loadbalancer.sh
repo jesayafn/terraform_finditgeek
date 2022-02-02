@@ -32,14 +32,5 @@ http{
         
         proxy_pass http://finditgeek:80
     }
-
-    server {
-        listen 80;
-        access_log /var/log/nginx/finditgeek-presentation_access_log;
-        error_log /var/log/nginx/finditgeek-presentation_error_log;
-        
-        return 301 https://10.10.10.10:443;
-
-    }
 }
 EOF'

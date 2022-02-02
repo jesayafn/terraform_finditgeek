@@ -76,14 +76,6 @@ resource "aws_security_group" "finditgeek_presentation_loadbalancer" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  ingress {
-    description = "HTTP"
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
   egress {
     from_port   = 0
     to_port     = 0
@@ -114,6 +106,14 @@ resource "aws_security_group" "finditgeek_presentation_webserver" {
     to_port     = 0
     protocol    = "icmp"
     cidr_blocks = ["10.10.10.0/28"]
+  }
+
+  ingress {
+    description = "HTTP"
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {
